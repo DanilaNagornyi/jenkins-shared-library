@@ -10,11 +10,6 @@ def call(Map config = [:]) {
             nodejs "my-nodejs"
         }
 
-        environment {
-            REGISTRY = registry
-            IMAGE = image
-        }
-
         stages {
 
             stage('Install deps & test') {
@@ -48,7 +43,7 @@ def call(Map config = [:]) {
             stage('Docker build') {
                 steps {
                     dir("app") {
-                        sh "docker build -t ${REGISTRY}/${IMAGE}:${VERSION} ."
+                        sh "docker build -t ${registry}/${image}:${VERSION} ."
                     }
                 }
             }
@@ -59,7 +54,7 @@ def call(Map config = [:]) {
                             usernameVariable: 'USER', passwordVariable: 'PASS')]) {
 
                         sh "echo ${PASS} | docker login -u ${USER} --password-stdin registry.gitlab.com"
-                        sh "docker push ${REGISTRY}/${IMAGE}:${VERSION}"
+                        sh "docker push ${registry}/${image}:${VERSION}"
 
                     }
                 }
