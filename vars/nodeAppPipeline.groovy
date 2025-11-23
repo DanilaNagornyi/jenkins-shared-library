@@ -69,7 +69,7 @@ def call(Map config = [:]) {
                         sh 'git config --global user.name "jenkins"'
                         sh "git add ."
                         sh "git commit -m \"ci: version bump to ${VERSION}\" || true"
-                        sh "git push https://${USER}:${PASS}@gitlab.com/${env.GITLAB_USER_LOGIN}/jenkins-exercises.git HEAD:${env.GIT_BRANCH}"
+                        sh "git push https://${USER}:${PASS}@gitlab.com/DanilaNagornyi/jenkins-exercises.git HEAD:${env.GIT_BRANCH}"
                     }
                 }
             }
